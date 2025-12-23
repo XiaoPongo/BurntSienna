@@ -1,0 +1,309 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Theme variables
+   ========================= */
+:root {
+  /* Main page background (beige swatch) */
+  --theme-bg: #fdf1dc;
+
+  /* Slightly darker tone for highlighted sections */
+  --theme-bg-dark: #edd6b3;
+
+  /* Text and accent colors */
+  --text-primary: #1b1b1b;
+  --accent-burnt: #783324; /* burnt sienna */
+}
+
+/* =========================
+   Global layout & background
+   ========================= */
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--theme-bg);
+  color: var(--text-primary);
+  transition: background-color 0.35s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force beige fallback on all elements */
+body,
+#__next {
+  background-color: #fdf1dc !important;
+}
+
+/* =========================
+   Wave animation
+   ========================= */
+@keyframes wave-sway {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+.animate-wave-sway {
+  animation: wave-sway 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* =========================
+   Section theme helpers
+   ========================= */
+.theme--dark {
+  background-color: var(--theme-bg-dark);
+  transition: background-color 220ms ease;
+}
+
+.theme-block {
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .theme-block {
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+}
+
+/* =========================
+   Hero fade & wave fixes
+   ========================= */
+.hero-bg-fade {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.0004),
+    rgba(253, 241, 220, 1) 5%,
+    rgba(253, 241, 220, 1) 100%
+  );
+}
+
+.bg-gradient-to-b.from-transparent.to-white {
+  background-image: linear-gradient(to bottom, transparent, #fdf1dc) !important;
+}
+
+/* Wave SVG full stretch – edge-to-edge, no gaps */
+section > div > svg[preserveAspectRatio='none'] {
+  position: relative !important;
+  width: 100vw !important;
+  left: 50% !important;
+  margin-left: -50vw !important;
+}
+
+/* =========================
+   Scrollbar – pill-shaped, burnt sienna
+   ========================= */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-burnt) #f4e9e3;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4e9e3;
+  border-radius: 9999px;
+  margin: 4px 0;
+}
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-resizer {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-burnt);
+  border: 4px solid transparent;
+  border-radius: 9999px;
+  background-clip: padding-box;
+  min-height: 56px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a3a29;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #9b4a34;
+}
+
+/* =========================
+   Image protection
+   ========================= */
+.no-select-img,
+.no-select-img img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* =========================
+   Navbar backdrop (optional)
+   ========================= */
+.nav-backdrop {
+  background-color: rgba(120, 51, 36, 0.85);
+  color: var(--theme-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* =========================
+   Accessibility
+   ========================= */
+:focus {
+  outline: 3px solid rgba(120, 51, 36, 0.12);
+  outline-offset: 2px;
+}
+
+/* =========================
+   Slider wrapper
+   ========================= */
+.swipe-wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* Dark theme text */
+.theme--dark,
+.theme--dark .slide-caption .caption-inner {
+  color: #111;
+}
+
+/* =========================
+   Glide 3D Carousel (Improved – NO dark overlay)
+   ========================= */
+
+.glide {
+  padding: 5rem 0;
+  overflow: visible;
+}
+
+.glide__track,
+.glide__slides,
+.glide__slide {
+  overflow: visible !important;
+}
+
+.glide__slides {
+  perspective: 1400px;
+}
+
+/* Card */
+.glide-card {
+  width: 300px;
+  height: 420px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  transform: rotateY(-18deg) scale(0.88) translateX(30px);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Active (center) card */
+.glide__slide--active .glide-card {
+  transform: rotateY(0deg) scale(1.08) translateX(0);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.65);
+  z-index: 5;
+}
+
+/* Right card */
+.glide__slide--active + .glide__slide .glide-card {
+  transform: rotateY(18deg) scale(0.88) translateX(-30px);
+}
+
+/* Left card */
+.glide__slide:not(.glide__slide--active):has(+ .glide__slide--active)
+  .glide-card {
+  transform: rotateY(-18deg) scale(0.88) translateX(30px);
+}
+
+/* Caption wrapper – NO background */
+.glide-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  background: none;
+}
+
+/* Show caption on hover or when centered */
+.glide-card:hover .glide-card__overlay,
+.glide__slide--active .glide-card__overlay {
+  opacity: 1;
+}
+
+/* Caption text only */
+.glide-card__overlay h4 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.65);
+  user-select: none;
+}
+
+/* Circular arrows */
+.glide__arrow {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+  display: grid;
+  place-items: center;
+}
+
+.glide__arrow--left {
+  left: -12px;
+}
+
+.glide__arrow--right {
+  right: -12px;
+}
+
+/* Prevent horizontal scroll caused by carousel */
+html,
+body,
+#__next {
+  overflow-x: hidden;
+}
+
+/* END OF GLOBALS */
