@@ -1,6 +1,8 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",        // enables static export
+  trailingSlash: true,     // optional: adds / after routes
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
