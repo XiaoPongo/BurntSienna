@@ -1,13 +1,17 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",        // enables static export
-  trailingSlash: true,     // optional: adds / after routes
+  output: 'export',
+  trailingSlash: true,
+
+  // 👇 required for GitHub Pages repo subpath
+  basePath: '/BurntSienna',
+  assetPrefix: '/BurntSienna/',
+
+  // 👇 required for static export with next/image
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'raw.githubusercontent.com' },
-    ],
+    unoptimized: true,
   },
 };
+
 module.exports = nextConfig;
